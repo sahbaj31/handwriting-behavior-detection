@@ -1,0 +1,47 @@
+{
+  "database": {
+    "name": "Handwriting Behavior Detection DB",
+    "version": "1.0",
+    "tables": {
+      "predictions": {
+        "description": "Stores all prediction results",
+        "fields": {
+          "id": "Primary key",
+          "user_id": "User identifier (optional)",
+          "behavior": "Detected behavior class",
+          "confidence": "Confidence score (0-1)",
+          "scores": "All behavior scores as JSON",
+          "slant_angle": "Handwriting slant in degrees",
+          "avg_size": "Average letter size",
+          "stroke": "Stroke thickness measurement",
+          "analysis": "Detailed behavioral analysis",
+          "image_hash": "Hash of uploaded image",
+          "created_at": "Timestamp of prediction",
+          "updated_at": "Last updated timestamp"
+        }
+      },
+      "behavior_classes": {
+        "description": "Reference data for behavior types",
+        "fields": {
+          "id": "Primary key",
+          "name": "Behavior name",
+          "description": "Human readable description",
+          "characteristics": "Key characteristics",
+          "color_code": "UI color representation",
+          "emoji": "Associated emoji"
+        }
+      },
+      "datasets": {
+        "description": "Training datasets for model improvement",
+        "fields": {
+          "id": "Primary key",
+          "name": "Dataset name",
+          "description": "Dataset description",
+          "behavior": "Associated behavior class",
+          "image_count": "Number of images in dataset",
+          "created_at": "Dataset creation date"
+        }
+      }
+    }
+  }
+}
