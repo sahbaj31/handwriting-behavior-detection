@@ -1,20 +1,18 @@
 "use client"
 
-import type React from "react"
-
 import { useState, useRef } from "react"
 import { Upload, Loader2, AlertCircle } from "lucide-react"
 import PredictionResult from "./prediction-result"
 
-export default function ImageUploader({ onPredictionComplete }: { onPredictionComplete: (prediction: any) => void }) {
-  const [image, setImage] = useState<File | null>(null)
-  const [preview, setPreview] = useState<string | null>(null)
+export default function ImageUploader({ onPredictionComplete }) {
+  const [image, setImage] = useState(null)
+  const [preview, setPreview] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [result, setResult] = useState<any>(null)
-  const [error, setError] = useState<string | null>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [result, setResult] = useState(null)
+  const [error, setError] = useState(null)
+  const fileInputRef = useRef(null)
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e) => {
     const file = e.target.files?.[0]
     if (!file) return
 
@@ -29,12 +27,12 @@ export default function ImageUploader({ onPredictionComplete }: { onPredictionCo
 
     const reader = new FileReader()
     reader.onload = (e) => {
-      setPreview(e.target?.result as string)
+      setPreview(e.target?.result)
     }
     reader.readAsDataURL(file)
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!image) {
       setError("Please select an image")

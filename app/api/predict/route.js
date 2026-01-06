@@ -1,4 +1,4 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 import { predictBehavior } from "@/lib/behavior-detector"
 
 export const config = {
@@ -9,10 +9,10 @@ export const config = {
   },
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request) {
   try {
     const formData = await request.formData()
-    const file = formData.get("file") as File
+    const file = formData.get("file")
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })

@@ -6,10 +6,10 @@ import ImageUploader from "@/components/image-uploader"
 import PredictionHistory from "@/components/prediction-history"
 
 export default function Home() {
-  const [predictions, setPredictions] = useState<any[]>([])
+  const [predictions, setPredictions] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const handlePredictionComplete = (newPrediction: any) => {
+  const handlePredictionComplete = (newPrediction) => {
     setPredictions([newPrediction, ...predictions])
   }
 

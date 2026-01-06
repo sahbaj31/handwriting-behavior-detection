@@ -3,7 +3,7 @@
 import { formatDistanceToNow } from "date-fns"
 import { Calendar } from "lucide-react"
 
-export default function PredictionHistory({ predictions }: { predictions: any[] }) {
+export default function PredictionHistory({ predictions }) {
   if (predictions.length === 0) {
     return (
       <div className="bg-slate-800 rounded-2xl border border-slate-700 p-8 text-center">
@@ -34,7 +34,7 @@ export default function PredictionHistory({ predictions }: { predictions: any[] 
               </div>
             </div>
             <div className="flex gap-1">
-              {Object.entries(pred.scores || {}).map(([key, value]: [string, any]) => (
+              {Object.entries(pred.scores || {}).map(([key, value]) => (
                 <div
                   key={key}
                   className="flex-1 h-1 rounded-full bg-slate-600"
