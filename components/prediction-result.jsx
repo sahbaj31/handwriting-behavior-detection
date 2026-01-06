@@ -20,7 +20,7 @@ export default function PredictionResult({ result, onReset, preview }) {
 
   const scores = result.scores || {}
   const primaryBehavior = result.behavior || "Unknown"
-  const confidence = result.confidence || 0
+  const confidence = (result.confidence || 0) / 100 // Convert from percentage if already multiplied
 
   const modelAccuracy = result.modelAccuracy || 0
   const overallAccuracy = result.overallAccuracy || 0
@@ -142,12 +142,12 @@ Visit our mood suggestions and movie recommendations for personalized insights.
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
             <p className="text-slate-300 font-medium">Confidence Score</p>
-            <p className="text-2xl font-bold text-cyan-500">{(confidence * 100).toFixed(2)}%</p>
+            <p className="text-2xl font-bold text-cyan-500">{Math.min(100, (confidence * 100).toFixed(2))}%</p>
           </div>
           <div className="w-full bg-slate-600 rounded-full h-3 overflow-hidden">
             <div
               className="bg-gradient-to-r from-cyan-500 to-blue-500 h-full rounded-full transition-all"
-              style={{ width: `${confidence * 100}%` }}
+              style={{ width: `${Math.min(100, confidence * 100)}%` }}
             />
           </div>
         </div>
@@ -174,15 +174,15 @@ Visit our mood suggestions and movie recommendations for personalized insights.
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div className="bg-slate-800 rounded-xl p-4 border border-slate-700">
           <p className="text-slate-400 text-xs font-semibold mb-1">OVERALL ACCURACY</p>
-          <p className="text-2xl font-bold text-green-500">{overallAccuracy.toFixed(1)}%</p>
+          <p className="text-2xl font-bold text-green-500">{Math.min(100, overallAccuracy).toFixed(1)}%</p>
         </div>
         <div className="bg-slate-800 rounded-xl p-4 border border-slate-700">
           <p className="text-slate-400 text-xs font-semibold mb-1">MODEL ACCURACY</p>
-          <p className="text-2xl font-bold text-blue-500">{modelAccuracy.toFixed(1)}%</p>
+          <p className="text-2xl font-bold text-blue-500">{Math.min(100, modelAccuracy).toFixed(1)}%</p>
         </div>
         <div className="bg-slate-800 rounded-xl p-4 border border-slate-700">
           <p className="text-slate-400 text-xs font-semibold mb-1">FEATURE CONSISTENCY</p>
-          <p className="text-2xl font-bold text-purple-500">{featureConsistency}%</p>
+          <p className="text-2xl font-bold text-purple-500">{Math.min(100, featureConsistency)}%</p>
         </div>
         <div className="bg-slate-800 rounded-xl p-4 border border-slate-700">
           <p className="text-slate-400 text-xs font-semibold mb-1">ENTROPY</p>
@@ -194,7 +194,7 @@ Visit our mood suggestions and movie recommendations for personalized insights.
         </div>
         <div className="bg-slate-800 rounded-xl p-4 border border-slate-700">
           <p className="text-slate-400 text-xs font-semibold mb-1">CONFIDENCE</p>
-          <p className="text-2xl font-bold text-emerald-500">{(confidence * 100).toFixed(1)}%</p>
+          <p className="text-2xl font-bold text-emerald-500">{Math.min(100, (confidence * 100).toFixed(1))}%</p>
         </div>
       </div>
 
